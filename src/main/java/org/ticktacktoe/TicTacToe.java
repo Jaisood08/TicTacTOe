@@ -26,6 +26,7 @@ public class TicTacToe {
         // Play Game
         Random rand = new Random();
         int randomMoves = 40;
+        int playerIndex = 0;
         while(randomMoves>0)
         {
             int i = rand.nextInt(size);
@@ -33,8 +34,11 @@ public class TicTacToe {
             boolean check = gamePlayController.MakeMove(game,i,j);
             if(check)
             {
-                System.out.println("\n Making Move "+i+" "+j);
+                System.out.print("\n Making Move "+i+" "+j+" For Player : ");
+                game.getPlayers().get(playerIndex).getSymbol().DisplaySymbol();
+                System.out.println();
                 gamePlayController.Display(game);
+                playerIndex = game.getNextPlayerIndex();
                 randomMoves--;
             }
 
