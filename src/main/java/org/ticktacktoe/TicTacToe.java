@@ -12,7 +12,7 @@ public class TicTacToe {
         List<Player> players = new ArrayList<Player>();
         for(int playerIndex=0;playerIndex<size;playerIndex++)
         {
-            char s = (char)('a'+ playerIndex);
+            char s = (char)('0'+playerIndex);
             String symbol = ""+s;
             players.add(new HumanPlayer("p1",new Symbol(symbol)));
         }
@@ -25,7 +25,7 @@ public class TicTacToe {
 
         // Play Game
         Random rand = new Random();
-        int randomMoves = 10;
+        int randomMoves = 40;
         while(randomMoves>0)
         {
             int i = rand.nextInt(size);
