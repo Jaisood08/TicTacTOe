@@ -1,8 +1,14 @@
 package org.ticktacktoe.controller;
 import org.ticktacktoe.models.Game;
+import org.ticktacktoe.models.GameWinningStrategy;
 import org.ticktacktoe.models.Player;
 import org.ticktacktoe.services.GameService;
+import org.ticktacktoe.strategies.winning.Column;
+import org.ticktacktoe.strategies.winning.Diagonal;
+import org.ticktacktoe.strategies.winning.Row;
+import org.ticktacktoe.strategies.winning.WinningStrategies;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
@@ -15,7 +21,17 @@ public class GameController {
 
     public Game startGame(int size, List<Player> players)
     {
-        return new Game(size,players);
+        List<WinningStrategies> gameWinningStrategies = new ArrayList<>();
+        gameWinningStrategies.add(new Row());
+        gameWinningStrategies.add(new Column());
+        gameWinningStrategies.add(new Diagonal());
+
+
+        return new Game.GameBuilder()
+                .setSize(size)
+                .setPlayers(players)
+                .setGameWinningStrategies(gameWinningStrategies)
+                .build();
     }
 
     public void Display(Game game)
@@ -25,8 +41,8 @@ public class GameController {
         System.out.println("----------------------------------------------------------");
     }
 
-    public void MakeMove(Game game,int row,int col,Player player)
+    public boolean MakeMove(Game game,int row,int col)
     {
-        gameService.MakeMove(game,row,col,player);
+        return gameService.MakeMove(game,row,col);
     }
 }

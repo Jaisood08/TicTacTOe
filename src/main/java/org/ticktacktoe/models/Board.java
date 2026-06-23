@@ -8,6 +8,10 @@ public class Board {
     private int size;
     private List<List<Cell>> board;
 
+    public int getSize() {
+        return size;
+    }
+
     public Board(int size) {
         this.size = size;
         setBoard();
